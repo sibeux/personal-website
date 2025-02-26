@@ -145,6 +145,8 @@ include './database/db.php';
                                     class="fab fa-facebook"></i></a></li>
                         <li class="list-inline-item"><a href="https://twitter.com/WahabiNasrul" target="_blank"><i
                                     class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.tiktok.com/@sibeux" target="_blank"><i
+                                    class="fab fa-tiktok"></i></a></li>
                         <li <li class="list-inline-item"><a href="https://bit.ly/HabiqiYT" target="_blank"><i
                                     class="fab fa-youtube"></i></a></li>
                         <li class="list-inline-item"><a href="https://github.com/sibeux" target="_blank"><i
