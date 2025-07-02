@@ -612,7 +612,7 @@ include './database/db.php';
                             </div>
                             <div class="exp-content">
                                 <h3>S1 Sistem Informasi</h3>
-                                <p>Undergraduate student of Information Systems in the Faculty of Computer Science at
+                                <p>Bachelor’s Degree - Information Systems in the Faculty of Computer Science at
                                     the University of Jember</p>
                             </div>
                         </div>
