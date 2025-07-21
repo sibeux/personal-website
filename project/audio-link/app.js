@@ -1,5 +1,3 @@
-
-
 async function playSong() {
     var url = document.getElementById("song-url").value;
     var audioPlayer = document.getElementById("audio-player");
@@ -17,23 +15,27 @@ async function playSong() {
 }
 
 function checkUrlFromDrive(urlDb) {
-    // Fetch the Google Drive API key
     return fetch(
         "https://sibeux.my.id/cloud-music-player/database/mobile-music-player/api/gdrive_api"
     )
         .then((response) => response.json())
         .then((apiData) => {
-            const gdriveApiKey = apiData[0].gdrive_api;
+            // Filter data yang email mengandung '@gmail.com'
+            const gmailData = apiData.filter((item) =>
+                item.email.includes("@gmail.com")
+            );
+
+            if (gmailData.length === 0) {
+                console.warn("No Gmail API key found, using default.");
+                return urlDb;
+            }
+
+            // Random pilih satu API key dari gmailData
+            const randomIndex = Math.floor(Math.random() * gmailData.length);
+            const gdriveApiKey = gmailData[randomIndex].gdrive_api;
 
             if (urlDb.includes("drive.google.com")) {
-                const regExp = /\/d\/([a-zA-Z0-9_-]+)/;
-                const matches = urlDb.match(regExp);
-                if (matches && matches[1]) {
-                    return `https://www.googleapis.com/drive/v3/files/${matches[1]}?alt=media&key=${gdriveApiKey}`;
-                }
-            } else if (urlDb.includes("www.googleapis.com")) {
-                const regExp = /files\/([a-zA-Z0-9_-]+)\?/;
-                const matches = urlDb.match(regExp);
+                const matches = urlDb.match(/\/d\/([a-zA-Z0-9_-]+)/);
                 if (matches && matches[1]) {
                     return `https://www.googleapis.com/drive/v3/files/${matches[1]}?alt=media&key=${gdriveApiKey}`;
                 }

@@ -2,3 +2,6 @@ desktop.ini
 
 # ignore all file with .ini extension
 *.ini
+desktop.ini
+desktop.ini
+test/desktop.ini
