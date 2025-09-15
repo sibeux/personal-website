@@ -1,9 +1,9 @@
 <?php
 
 define('HOST', 'localhost');
-define('SIBEUX', 'sibe5579_cbux');
+define('SIBEUX', 'sibs6571_cbux');
 define('pass', '1NvgEHFnwvDN96');
-define('DB', 'sibe5579_sihalal');
+define('DB', 'sibs6571_sihalal');
 
 // define('HOST', 'localhost');
 // define('SIBEUX', 'root');
