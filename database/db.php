@@ -12,6 +12,7 @@ define('DB', 'sibs6571_cloud_music'); // Ganti dengan nama database hosting
 
 $db = new mysqli(HOST, SIBEUX, pass, DB);
 
-if($db->connect_errno){
-    die('Tidak dapat terhubung ke database');
+if ($db->connect_errno) {
+    // die('Tidak dapat terhubung ke database');
+    echo 'Tidak dapat terhubung ke database';
 }

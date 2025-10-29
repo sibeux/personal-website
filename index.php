@@ -278,18 +278,19 @@ include './database/db.php';
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- about text -->
-                                    <p>I am Fresh Graduate – Information Systems at the University of Jember with
-                                        experience
-                                        in BEM as Multimedia Staff and Head of Multimedia Sub-Division. I specialize in
-                                        mobile development using Flutter and have intermediate skills in graphic design
-                                        and video editing. I also take on freelance projects to create simple website
-                                        applications, aiming to leverage my skills for innovative and impactful
-                                        projects.
+                                    <p>I am a recent graduate in Information Systems from the University of Jember.
+                                        During my studies, I was actively involved in the BEM FASILKOM UNEJ student
+                                        organization for two years. I also
+                                        participated in the MSIB program (batches 3 and 4), including an internship as a
+                                        programmer at BPJPH. In
+                                        addition, I actively work on Android mobile
+                                        development projects using Flutter, both for personal projects and freelance
+                                        collaborations with clients.
                                     </p>
 
                                     <!-- CURRICULUM CITAE -->
                                     <div class="mt-3">
-                                        <a href="https://drive.google.com/file/d/1nz8WJVXyf_q0Ar5Lt3bNIsqP7BN2ee13/view?usp=drive_link"
+                                        <a href="https://drive.google.com/file/d/1kd-VASIAcRFt9vK6pGJObBMdgszxnrXv/view?usp=sharing"
                                             target="_blank" class="btn btn-default">Download CV</a>
                                     </div>
                                     <div class="spacer d-md-none d-lg-none" data-height="30"></div>
@@ -461,7 +462,7 @@ include './database/db.php';
                             data-color="#65f0bf">
                             <img src="images/service-2.svg" alt="UI/UX design" />
                             <h3 class="mb-3 mt-0">Programming</h3>
-                            <p class="mb-0">Java, Python, Kotlin, Linux, Web Development, Mobile Development.</p>
+                            <p class="mb-0">Java, Python, Flutter, Linux, Web Development, Mobile Development.</p>
                         </div>
                         <div class="spacer d-md-none d-lg-none" data-height="30"></div>
                     </div>
