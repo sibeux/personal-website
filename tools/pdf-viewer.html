@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer - Discord CDN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
+            padding: 25px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255,255,255,0.2);
+        }
+
+        button {
+            padding: 12px 30px;
+            background: white;
+            color: #5865F2;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .viewer-container {
+            flex: 1;
+            position: relative;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .placeholder svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .placeholder h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .placeholder p {
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+
+        iframe.active {
+            display: block;
+        }
+
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #5865F2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            display: none;
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .error.active {
+            display: block;
+        }
+
+        .info {
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                height: calc(100vh - 20px);
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .input-wrapper {
+                min-width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                PDF Viewer Online
+            </h1>
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <input type="text" id="pdfUrl" placeholder="Masukkan URL PDF (Discord CDN atau URL lainnya)">
+                </div>
+                <button onclick="loadPDF()">Buka PDF</button>
+            </div>
+            <div class="info">
+                <strong>💡 Tips:</strong>
+                Paste URL file PDF dari Discord CDN atau sumber lainnya. Contoh: https://cdn.discordapp.com/attachments/.../file.pdf
+            </div>
+        </div>
+
+        <div class="viewer-container">
+            <div class="placeholder" id="placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <h2>Belum Ada PDF yang Dibuka</h2>
+                <p>Masukkan URL file PDF di atas untuk mulai melihat dokumen</p>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Memuat PDF...</p>
+            </div>
+
+            <div class="error" id="error">
+                <strong>⚠️ Error:</strong>
+                <p id="errorMessage"></p>
+            </div>
+
+            <iframe id="pdfViewer"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const pdfInput = document.getElementById('pdfUrl');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const placeholder = document.getElementById('placeholder');
+        const loading = document.getElementById('loading');
+        const error = document.getElementById('error');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Load PDF saat Enter ditekan
+        pdfInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loadPDF();
+            }
+        });
+
+        function loadPDF() {
+            const url = pdfInput.value.trim();
+
+            // Reset state
+            hideAll();
+            error.classList.remove('active');
+
+            if (!url) {
+                showError('Silakan masukkan URL PDF terlebih dahulu');
+                return;
+            }
+
+            // Validasi URL
+            if (!isValidURL(url)) {
+                showError('URL tidak valid. Pastikan URL dimulai dengan http:// atau https://');
+                return;
+            }
+
+            // Cek apakah file adalah PDF
+            if (!url.toLowerCase().includes('.pdf')) {
+                const confirm = window.confirm('URL tidak berakhiran .pdf. Apakah Anda yakin ini adalah file PDF?');
+                if (!confirm) return;
+            }
+
+            // Tampilkan loading
+            loading.classList.add('active');
+
+            // Gunakan Google Docs Viewer atau Mozilla PDF.js viewer
+            // Google Docs Viewer lebih kompatibel dengan berbagai sumber
+            const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
+            
+            // Alternatif: gunakan Mozilla PDF.js
+            // const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
+
+            pdfViewer.src = viewerUrl;
+
+            // Handle load event
+            pdfViewer.onload = function() {
+                loading.classList.remove('active');
+                pdfViewer.classList.add('active');
+            };
+
+            // Handle error event
+            pdfViewer.onerror = function() {
+                loading.classList.remove('active');
+                showError('Gagal memuat PDF. Pastikan URL valid dan file dapat diakses publik.');
+            };
+
+            // Timeout jika loading terlalu lama
+            setTimeout(function() {
+                if (loading.classList.contains('active')) {
+                    loading.classList.remove('active');
+                    pdfViewer.classList.add('active');
+                }
+            }, 5000);
+        }
+
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return string.startsWith('http://') || string.startsWith('https://');
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            error.classList.add('active');
+            placeholder.style.display = 'flex';
+        }
+
+        function hideAll() {
+            placeholder.style.display = 'none';
+            loading.classList.remove('active');
+            pdfViewer.classList.remove('active');
+        }
+
+        // Auto-focus ke input saat halaman dimuat
+        window.addEventListener('load', function() {
+            pdfInput.focus();
+        });
+    </script>
+</body>
+</html>

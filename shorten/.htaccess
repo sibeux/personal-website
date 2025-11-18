@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /shorten/
+
+# Rule untuk mengarahkan URL pendek yang memiliki panjang antara 1 hingga 100 karakter
+RewriteRule ^([a-zA-Z0-9]{1,100})$ index.php [QSA,L]
