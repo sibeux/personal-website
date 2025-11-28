@@ -42,7 +42,6 @@ include './database/db.php';
                 <div></div>
                 <div></div>
             </div>
-
             <!-- Safari and others -->
             <div class="infinity">
                 <div>
@@ -114,7 +113,7 @@ include './database/db.php';
         <!-- site footer -->
         <div class="footer">
             <!-- copyright text -->
-            <span class="copyright">© 2024 SibeUX Website.</span>
+            <span class="copyright">© 2025 SibeUX Website.</span>
         </div>
 
     </header>
@@ -133,8 +132,7 @@ include './database/db.php';
 
                     <!-- info -->
                     <h1 class="mb-2 mt-0">M. Nasrul Wahabi</h1>
-                    <span>I'm <span class="text-rotating">a Programmer, a Graphic Designer, an Information Systems
-                            Student
+                    <span>I'm <span class="text-rotating">a Fullstack Programmer, a Graphic Designer
                         </span></span>
 
                     <!-- social icons -->
@@ -420,8 +418,8 @@ include './database/db.php';
                         <div class="fact-item">
                             <span class="icon icon-bubbles"></span>
                             <div class="details">
-                                <h3 class="mb-0 mt-0 number"><em class="count">381</em></h3>
-                                <p class="mb-0">Comments Youtube</p>
+                                <h3 class="mb-0 mt-0 number"><em class="count">1800</em></h3>
+                                <p class="mb-0">Adobe Stock Image</p>
                             </div>
                         </div>
                     </div>
@@ -548,6 +546,16 @@ include './database/db.php';
                             <!-- timeline item -->
                             <div class="timeline-container wow fadeInUp">
                                 <div class="content">
+                                    <span class="time">Nov 2025 - Present</span>
+                                    <h3 class="title">IT Upstream Solutions</h3>
+                                    <p>PT Pertamina Hulu Indonesia
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- timeline item -->
+                            <div class="timeline-container wow fadeInUp">
+                                <div class="content">
                                     <span class="time">Feb - Jun 2023</span>
                                     <h3 class="title">Programmer</h3>
                                     <p>Programmer Internship at BPJPH Kemenag
@@ -606,6 +614,22 @@ include './database/db.php';
                             <div class="exp-thumb">
                                 <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/cropped-Logo-Baku-UNEJ-2020-Square.png"
                                     alt="experience" height="40" width="40">
+                                <h6>PT Pertamina Hulu Indonesia</h6>
+                                <div class="exp-cata">
+                                    <span>Nov 2025 - Present</span>
+                                </div>
+                            </div>
+                            <div class="exp-content">
+                                <h3>IT Upstream Solutions</h3>
+                                <p>IT Internship for Six Months through Maganghub Kemnaker</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
+                        <div class="exp-inner">
+                            <div class="exp-thumb">
+                                <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/cropped-Logo-Baku-UNEJ-2020-Square.png"
+                                    alt="experience" height="40" width="40">
                                 <h6>Universitas Jember</h6>
                                 <div class="exp-cata">
                                     <span>2020 - 2025</span>
@@ -618,7 +642,25 @@ include './database/db.php';
                             </div>
                         </div>
                     </div>
-                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
+                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                        <div class="exp-inner">
+                            <div class="exp-thumb">
+                                <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/halal.png"
+                                    alt="experience" height="40" width="40">
+                                <h6>BPJPH Kemenag RI</h6>
+                                <div class="exp-cata">
+                                    <span>Feb - Jun 2023</span>
+                                </div>
+                            </div>
+                            <div class="exp-content">
+                                <h3>Programmer</h3>
+                                <p>An intern student of MSIB Batch 4 at BPJPH, serving as a member of the programming
+                                    division.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
                         <div class="exp-inner">
                             <div class="exp-thumb">
                                 <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/BEM%20Logo.png"
@@ -636,7 +678,7 @@ include './database/db.php';
                             </div>
                         </div>
                     </div>
-                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
                         <div class="exp-inner">
                             <div class="exp-thumb">
                                 <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/hacktiv8-1.png"
@@ -652,23 +694,7 @@ include './database/db.php';
                             </div>
                         </div>
                     </div>
-                    <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
-                        <div class="exp-inner">
-                            <div class="exp-thumb">
-                                <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/halal.png"
-                                    alt="experience" height="40" width="40">
-                                <h6>BPJPH Kemenag RI</h6>
-                                <div class="exp-cata">
-                                    <span>Feb - Jun 2023</span>
-                                </div>
-                            </div>
-                            <div class="exp-content">
-                                <h3>Programmer</h3>
-                                <p>An intern student of MSIB Batch 4 at BPJPH, serving as a member of the programming
-                                    division.</p>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
