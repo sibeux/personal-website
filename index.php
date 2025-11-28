@@ -554,7 +554,7 @@ include './database/db.php';
                             </div>
 
                             <!-- timeline item -->
-                            <div class="timeline-container wow fadeInUp">
+                            <div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="content">
                                     <span class="time">Feb - Jun 2023</span>
                                     <h3 class="title">Programmer</h3>
@@ -564,7 +564,7 @@ include './database/db.php';
                             </div>
 
                             <!-- timeline item -->
-                            <div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="timeline-container wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="content">
                                     <span class="time">Aug - Dec 2022</span>
                                     <h3 class="title">Android Developer - Hacktiv8 Indonesia</h3>
@@ -612,8 +612,7 @@ include './database/db.php';
                     <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
                         <div class="exp-inner">
                             <div class="exp-thumb">
-                                <img src="https://raw.githubusercontent.com/sibeux/license-sibeux/MyProgram/cropped-Logo-Baku-UNEJ-2020-Square.png"
-                                    alt="experience" height="40" width="40">
+                                <img src="images/phi.jpg" alt="experience" height="40" width="40">
                                 <h6>PT Pertamina Hulu Indonesia</h6>
                                 <div class="exp-cata">
                                     <span>Nov 2025 - Present</span>
