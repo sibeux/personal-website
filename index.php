@@ -612,7 +612,7 @@ include './database/db.php';
                     <div class="exp-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
                         <div class="exp-inner">
                             <div class="exp-thumb">
-                                <img src="images/phi.jpg" alt="experience" height="40" width="40">
+                                <img src="images/phi.jpeg" alt="experience" height="40" width="40">
                                 <h6>PT Pertamina Hulu Indonesia</h6>
                                 <div class="exp-cata">
                                     <span>Nov 2025 - Present</span>
@@ -620,7 +620,7 @@ include './database/db.php';
                             </div>
                             <div class="exp-content">
                                 <h3>IT Upstream Solutions</h3>
-                                <p>IT Internship for Six Months through Maganghub Kemnaker</p>
+                                <p>Internship - IT Upstream Solutions for Six Months through Maganghub Kemnaker</p>
                             </div>
                         </div>
                     </div>
