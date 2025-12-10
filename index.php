@@ -620,7 +620,7 @@ include './database/db.php';
                             </div>
                             <div class="exp-content">
                                 <h3>IT Upstream Solutions</h3>
-                                <p>Internship - IT Upstream Solutions for Six Months through Maganghub Kemnaker</p>
+                                <p>Internship - Magang Jurusan IT (Upstream Solutions) for Six Months</p>
                             </div>
                         </div>
                     </div>
