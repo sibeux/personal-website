@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Formatter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-section, .output-section {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .output-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            min-height: 120px;
+            word-break: break-all;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .output-box.empty {
+            color: #999;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #38ef7d;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Text Formatter</h1>
+        <p class="subtitle">Ubah teks menjadi format lower-case-dash</p>
+
+        <div class="input-section">
+            <label for="inputText">Input Text:</label>
+            <textarea id="inputText" placeholder="Klik tombol Paste di bawah atau ketik teks di sini..."></textarea>
+            <button onclick="pasteText()">📋 Paste</button>
+        </div>
+
+        <div class="output-section">
+            <label>Hasil (lower-case-dash):</label>
+            <div id="outputText" class="output-box empty">Hasil akan muncul di sini...</div>
+            <button class="copy-btn" onclick="copyResult()">📄 Salin Hasil</button>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        const inputEl = document.getElementById('inputText');
+        const outputEl = document.getElementById('outputText');
+        const notifEl = document.getElementById('notification');
+
+        function formatText(text) {
+            return text
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        }
+
+        function updateOutput() {
+            const text = inputEl.value;
+            if (text.trim()) {
+                const formatted = formatText(text);
+                outputEl.textContent = formatted;
+                outputEl.classList.remove('empty');
+            } else {
+                outputEl.textContent = 'Hasil akan muncul di sini...';
+                outputEl.classList.add('empty');
+            }
+        }
+
+        async function pasteText() {
+            try {
+                const text = await navigator.clipboard.readText();
+                inputEl.value = text;
+                updateOutput();
+                showNotification('✅ Text berhasil di-paste!');
+            } catch (err) {
+                showNotification('❌ Gagal paste. Pastikan izin clipboard diaktifkan.');
+            }
+        }
+
+        async function copyResult() {
+            const result = outputEl.textContent;
+            if (result && !outputEl.classList.contains('empty')) {
+                try {
+                    await navigator.clipboard.writeText(result);
+                    showNotification('✅ Hasil berhasil disalin!');
+                } catch (err) {
+                    showNotification('❌ Gagal menyalin teks.');
+                }
+            } else {
+                showNotification('⚠️ Tidak ada hasil untuk disalin.');
+            }
+        }
+
+        function showNotification(message) {
+            notifEl.textContent = message;
+            notifEl.classList.add('show');
+            setTimeout(() => {
+                notifEl.classList.remove('show');
+            }, 2500);
+        }
+
+        inputEl.addEventListener('input', updateOutput);
+    </script>
+</body>
+</html>
