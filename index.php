@@ -276,20 +276,19 @@ include './database/db.php';
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- about text -->
-                                    <p>I am a recent graduate in Information Systems from the University of Jember.
-                                        During my studies, I was actively involved in the BEM FASILKOM UNEJ student
-                                        organization for two years. I also
-                                        participated in the MSIB program (batches 3 and 4), including an internship as a
-                                        programmer at BPJPH. In
-                                        addition, I actively work on Android mobile
-                                        development projects using Flutter, both for personal projects and freelance
-                                        collaborations with clients.
+                                    <p>Information Systems graduate with hands-on experience in software development and
+                                        proven leadership through
+                                        organizational roles. Currently interning at PT Pertamina Hulu Indonesia (BUMN),
+                                        with prior experience at
+                                        BPJPH through Kampus Merdeka MSIB programs. Combines technical expertise with
+                                        business acumen and
+                                        demonstrated ability to lead teams and manage projects in dynamic environments.
                                     </p>
 
                                     <!-- CURRICULUM CITAE -->
                                     <div class="mt-3">
-                                        <a href="https://drive.google.com/file/d/1kd-VASIAcRFt9vK6pGJObBMdgszxnrXv/view?usp=sharing"
-                                            target="_blank" class="btn btn-default">Download CV</a>
+                                        <a href="https://sibeux.my.id/shorten/resume" target="_blank"
+                                            class="btn btn-default">Download CV</a>
                                     </div>
                                     <div class="spacer d-md-none d-lg-none" data-height="30"></div>
                                 </div>
@@ -620,7 +619,7 @@ include './database/db.php';
                             </div>
                             <div class="exp-content">
                                 <h3>IT Upstream Solutions</h3>
-                                <p>Internship - Magang Jurusan IT (Upstream Solutions) for Six Months</p>
+                                <p>Internship - Magang Jurusan IT (Upstream Solutions)</p>
                             </div>
                         </div>
                     </div>
@@ -788,101 +787,101 @@ include './database/db.php';
 
                         if ($type == "work-image") {
                             ?>
-                    <!-- portfolio item -->
-                    <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
-                        <a href="<?php echo $asset ?>" class="work-image">
-                            <div class="portfolio-item rounded shadow-dark">
-                                <div class="details">
-                                    <span class="term"><?php echo $filter ?></span>
-                                    <h4 class="title"><?php echo $title ?></h4>
-                                    <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
-                                </div>
-                                <div class="thumb">
-                                    <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
-                                    <div class="mask"></div>
-                                </div>
+                            <!-- portfolio item -->
+                            <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
+                                <a href="<?php echo $asset ?>" class="work-image">
+                                    <div class="portfolio-item rounded shadow-dark">
+                                        <div class="details">
+                                            <span class="term"><?php echo $filter ?></span>
+                                            <h4 class="title"><?php echo $title ?></h4>
+                                            <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
+                                        </div>
+                                        <div class="thumb">
+                                            <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
+                                            <div class="mask"></div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <?php
+                            <?php
                         } elseif ($row['type'] == "gallery-link") {
                             // Get the links
                             $gallery_link = extractLinks($extra_asset);
                             ?>
-                    <!-- portfolio item -->
-                    <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
-                        <a href="#gallery-<?php echo $id ?>" class="gallery-link">
-                            <div class="portfolio-item rounded shadow-dark">
-                                <div class="details">
-                                    <span class="term"><?php echo $filter ?></span>
-                                    <h4 class="title"><?php echo $title ?></h4>
-                                    <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
-                                </div>
-                                <div class="thumb">
-                                    <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
-                                    <div class="mask"></div>
-                                </div>
-                            </div>
-                        </a>
-                        <div id="gallery-<?php echo $id ?>" class="gallery mfp-hide">
-                            <!-- <a href="images/works/id (2).png"></a>
+                            <!-- portfolio item -->
+                            <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
+                                <a href="#gallery-<?php echo $id ?>" class="gallery-link">
+                                    <div class="portfolio-item rounded shadow-dark">
+                                        <div class="details">
+                                            <span class="term"><?php echo $filter ?></span>
+                                            <h4 class="title"><?php echo $title ?></h4>
+                                            <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
+                                        </div>
+                                        <div class="thumb">
+                                            <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
+                                            <div class="mask"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div id="gallery-<?php echo $id ?>" class="gallery mfp-hide">
+                                    <!-- <a href="images/works/id (2).png"></a>
                             <a href="images/works/id (3).png"></a>
                             <a href="images/works/id (4).png"></a> -->
-                            <?php
+                                    <?php
                                     foreach ($gallery_link as $link) {
                                         echo "<a href='$link'></a>";
                                     }
                                     ?>
-                            ?>
-                        </div>
-                    </div>
-                    <?php
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
                         } elseif ($row['type'] == "work-video") {
                             ?>
-                    <!-- portfolio item -->
-                    <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
-                        <a href="<?php echo $asset ?>" class="work-video">
-                            <div class="portfolio-item rounded shadow-dark">
-                                <div class="details">
-                                    <span class="term"><?php echo $filter ?></span>
-                                    <h4 class="title"><?php echo $title ?></h4>
-                                    <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
-                                </div>
-                                <div class="thumb">
-                                    <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
-                                    <div class="mask"></div>
-                                </div>
+                            <!-- portfolio item -->
+                            <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
+                                <a href="<?php echo $asset ?>" class="work-video">
+                                    <div class="portfolio-item rounded shadow-dark">
+                                        <div class="details">
+                                            <span class="term"><?php echo $filter ?></span>
+                                            <h4 class="title"><?php echo $title ?></h4>
+                                            <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
+                                        </div>
+                                        <div class="thumb">
+                                            <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
+                                            <div class="mask"></div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <?php
+                            <?php
                         } elseif ($type == 'work-content') {
                             ?>
-                    <!-- portfolio item -->
-                    <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
-                        <a href="#small-dialog-<?php echo $id ?>" class="work-content">
-                            <div class="portfolio-item rounded shadow-dark">
-                                <div class="details">
-                                    <span class="term"><?php echo $filter ?></span>
-                                    <h4 class="title"><?php echo $title ?></h4>
-                                    <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
-                                </div>
-                                <div class="thumb">
-                                    <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
-                                    <div class="mask"></div>
+                            <!-- portfolio item -->
+                            <div class="col-md-4 col-sm-6 grid-item <?php echo getFilter($filter) ?>">
+                                <a href="#small-dialog-<?php echo $id ?>" class="work-content">
+                                    <div class="portfolio-item rounded shadow-dark">
+                                        <div class="details">
+                                            <span class="term"><?php echo $filter ?></span>
+                                            <h4 class="title"><?php echo $title ?></h4>
+                                            <span class="more-button"><i class="<?php echo getIcon($filter) ?>"></i></span>
+                                        </div>
+                                        <div class="thumb">
+                                            <img src="<?php echo $thumbnail ?>" alt="<?php echo $title ?>" />
+                                            <div class="mask"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div id="small-dialog-<?php echo $id ?>" class="white-popup zoom-anim-dialog mfp-hide">
+                                    <img src="<?php echo $asset ?>" alt="<?php echo $title ?>" />
+                                    <h2><?php echo $title ?></h2>
+                                    <p><?php echo $p1_content ?></p>
+                                    <p><?php echo $p2_content ?></p>
+                                    <a href="<?php echo $extra_asset ?>" target="_blank"
+                                        class="btn btn-default"><?php echo $caption ?></a>
                                 </div>
                             </div>
-                        </a>
-                        <div id="small-dialog-<?php echo $id ?>" class="white-popup zoom-anim-dialog mfp-hide">
-                            <img src="<?php echo $asset ?>" alt="<?php echo $title ?>" />
-                            <h2><?php echo $title ?></h2>
-                            <p><?php echo $p1_content ?></p>
-                            <p><?php echo $p2_content ?></p>
-                            <a href="<?php echo $extra_asset ?>" target="_blank"
-                                class="btn btn-default"><?php echo $caption ?></a>
-                        </div>
-                    </div>
-                    <?php
+                            <?php
                         }
                     }
                     $db->close();
