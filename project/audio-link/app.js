@@ -16,7 +16,7 @@ async function playSong() {
 
 function checkUrlFromDrive(urlDb) {
     return fetch(
-        "https://sibeux.my.id/cloud-music-player/database/mobile-music-player/api/gdrive_api"
+        "https://cdn.sibeux.my.id/cloud-music-player/database/mobile-music-player/api/gdrive_api"
     )
         .then((response) => response.json())
         .then((apiData) => {
