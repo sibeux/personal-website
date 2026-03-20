@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,8 @@
             font-size: 14px;
         }
 
-        .input-section, .output-section {
+        .input-section,
+        .output-section {
             margin-bottom: 25px;
         }
 
@@ -140,10 +142,19 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>📝 Text Formatter</h1>
         <p class="subtitle">Ubah teks menjadi format lower-case-dash</p>
+
+        <div class="input-section">
+            <!-- Override styling -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="timestamp" style="margin: 0;">
+                <label for="timestamp" style="margin: 0; align-items: center;">Timestamp</label>
+            </div>
+        </div>
 
         <div class="input-section">
             <label for="inputText">Input Text:</label>
@@ -164,14 +175,24 @@
         const inputEl = document.getElementById('inputText');
         const outputEl = document.getElementById('outputText');
         const notifEl = document.getElementById('notification');
+        const timestampEl = document.getElementById('timestamp');
 
         function formatText(text) {
-            return text
+            let finalText = '';
+            finalText = text
                 .toLowerCase()
                 .trim()
                 .replace(/[^a-z0-9\s-]/g, '')
                 .replace(/\s+/g, '-')
                 .replace(/-+/g, '-');
+            if (timestampEl.checked) {
+                // format yyyymmdd-hhmmss
+                const date = new Date();
+                const yyyymmdd = date.toISOString().slice(0, 10).replace(/-/g, '');
+                const hhmmss = date.toTimeString().slice(0, 8).replace(/:/g, '');
+                finalText = finalText + '-' + yyyymmdd + '-' + hhmmss;
+            }
+            return finalText;
         }
 
         function updateOutput() {
@@ -222,4 +243,5 @@
         inputEl.addEventListener('input', updateOutput);
     </script>
 </body>
+
 </html>
