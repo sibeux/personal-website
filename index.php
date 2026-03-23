@@ -1,5 +1,6 @@
 <?php
 include './database/db.php';
+require_once __DIR__ . '/fetch_portfolio.php';
 
 ?>
 <!DOCTYPE html>
