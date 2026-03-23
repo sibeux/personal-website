@@ -1,6 +1,5 @@
 <?php
 include './database/db.php';
-require_once __DIR__ . '/fetch_portfolio.php';
 
 ?>
 <!DOCTYPE html>
@@ -773,6 +772,9 @@ require_once __DIR__ . '/fetch_portfolio.php';
                         // Return the array of URLs
                         return $matches[1];
                     }
+
+                    $query = "SELECT * FROM designs LIMIT 9";
+                    $result = mysqli_query($db, $query);
 
                     while ($row = mysqli_fetch_array($result)) {
                         $id = $row['UID'];
