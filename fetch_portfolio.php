@@ -29,7 +29,7 @@ function getFilter($filter)
 }
 
 // Get the Google Drive API key
-$gdrive_api_query = $db->query("SELECT gdrive_api FROM API");
+$gdrive_api_query = $db->query("SELECT gdrive_api FROM APIs");
 $gdrive_api_key = mysqli_fetch_assoc($gdrive_api_query);
 
 function checkUrlFromDrive($url_db, string $gdrive_api_key)
