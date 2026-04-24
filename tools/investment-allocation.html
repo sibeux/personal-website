@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Investasi Multi-Currency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen p-4 md:p-10 font-sans">
+
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-slate-800 p-6 text-white text-center">
+            <h2 class="text-2xl font-bold italic">Cybeat Asset Allocator</h2>
+            <p class="text-slate-400 text-sm">Hitung alokasi index fund, btc, & gold</p>
+        </div>
+
+        <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Total Dana (IDR)</label>
+                    <input type="number" id="totalDana" placeholder="Misal: 1000000" 
+                        class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:outline-none text-xl font-semibold">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Kurs 1 USD ke IDR</label>
+                    <input type="number" id="kursUsd" placeholder="16000" 
+                        class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-green-500 focus:outline-none text-xl font-semibold">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase">S&P 500 (%)</label>
+                    <input type="number" id="pct_sp500" class="pct-input w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase">Nasdaq (%)</label>
+                    <input type="number" id="pct_nasdaq" class="pct-input w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase">BTC (%)</label>
+                    <input type="number" id="pct_btc" class="pct-input w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-orange-400 outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase">Gold (%)</label>
+                    <input type="number" id="pct_gold" class="pct-input w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                </div>
+            </div>
+
+            <div id="totalStatus" class="text-center mb-8 font-bold"></div>
+
+            <button onclick="hitungAlokasi()" 
+                class="w-full bg-slate-800 hover:bg-black text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-95">
+                HITUNG ALOKASI
+            </button>
+
+            <div id="hasil" class="mt-10 space-y-3 hidden">
+                <div class="grid grid-cols-3 text-xs font-bold text-slate-400 px-4 mb-2 uppercase">
+                    <span>Instrumen</span>
+                    <span class="text-right">Rupiah (IDR)</span>
+                    <span class="text-right">Dollar (USD)</span>
+                </div>
+                
+                <div id="render-hasil" class="space-y-2">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const keys = ['sp500', 'nasdaq', 'btc', 'gold'];
+        
+        window.onload = () => {
+            // Load percentages
+            keys.forEach(key => {
+                const val = localStorage.getItem('pct_' + key);
+                if (val) document.getElementById('pct_' + key).value = val;
+            });
+            // Load kurs
+            const savedKurs = localStorage.getItem('kurs_usd');
+            document.getElementById('kursUsd').value = savedKurs || 16000;
+            cekTotal();
+        };
+
+        document.querySelectorAll('.pct-input, #kursUsd').forEach(input => {
+            input.addEventListener('input', () => {
+                if(input.id === 'kursUsd') {
+                    localStorage.setItem('kurs_usd', input.value);
+                } else {
+                    localStorage.setItem(input.id, input.value);
+                }
+                cekTotal();
+            });
+        });
+
+        function cekTotal() {
+            let total = 0;
+            keys.forEach(key => {
+                total += parseFloat(document.getElementById('pct_' + key).value || 0);
+            });
+            const status = document.getElementById('totalStatus');
+            status.innerText = `Total Alokasi: ${total}%`;
+            status.className = `text-center mb-8 font-bold ${total === 100 ? 'text-green-600' : 'text-red-500'}`;
+            return total;
+        }
+
+        const formatIDR = (val) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
+        const formatUSD = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
+
+        function hitungAlokasi() {
+            const totalDana = parseFloat(document.getElementById('totalDana').value || 0);
+            const kurs = parseFloat(document.getElementById('kursUsd').value || 1);
+            
+            if (totalDana <= 0 || cekTotal() !== 100) {
+                alert("Cek kembali input dana dan pastikan total persentase 100%");
+                return;
+            }
+
+            const container = document.getElementById('render-hasil');
+            container.innerHTML = ''; // Clear previous
+
+            keys.forEach(key => {
+                const pct = parseFloat(document.getElementById('pct_' + key).value || 0);
+                const idrVal = (pct / 100) * totalDana;
+                const usdVal = idrVal / kurs;
+
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 hover:bg-white hover:shadow-md transition-all";
+                row.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="font-bold text-slate-800 uppercase text-sm">${key}</span>
+                        <span class="text-[10px] text-slate-400 font-bold">${pct}%</span>
+                    </div>
+                    <span class="font-mono font-bold text-slate-700">${formatIDR(idrVal)}</span>
+                    <span class="font-mono font-bold text-blue-600">${formatUSD(usdVal)}</span>
+                `;
+                container.appendChild(row);
+            });
+
+            document.getElementById('hasil').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
