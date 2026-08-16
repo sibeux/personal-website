@@ -6,9 +6,9 @@
 // define('DB', 'web_porto');
 
 define('HOST', 'localhost');
-define('SIBEUX', 'sibs6571_cbux'); // Ganti dengan username database hosting
+define('SIBEUX', 'sibn9212_cbux'); // Ganti dengan username database hosting
 define('pass', '1NvgEHFnwvDN96'); // Ganti dengan password database hosting
-define('DB', 'sibs6571_cloud_music'); // Ganti dengan nama database hosting
+define('DB', 'sibn9212_cloud_music'); // Ganti dengan nama database hosting
 
 $db = new mysqli(HOST, SIBEUX, pass, DB);
 
